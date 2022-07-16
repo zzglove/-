@@ -1,0 +1,76 @@
+import java.util.Objects;
+import java.util.Scanner;
+
+public class text {
+    public static void main(String[] args) {
+        Lost[] array = new Lost[5];
+        Lost one = new Lost("s", 12, "领取地点1");
+        Lost two = new Lost("d", 9, "领取地点2");
+        Lost three = new Lost("h", 7, "领取地点1");
+        Lost four = new Lost("g", 14, "领取地点1");
+        Lost five = new Lost("h", 16, "领取地点2");
+        array[0] = one;
+        array[1] = two;
+        array[2] = three;
+        array[3] = four;
+        array[4] = five;
+        System.out.println("对失物按时间从大到小排序");
+        sortLost(array);
+        System.out.print("[");
+        for (int i = 0; i < array.length; i++) {
+            if (i == array.length-1){
+                System.out.println(array[i].getDate()+"]");
+            }else {
+                System.out.print(array[i].getDate() + ",");
+            }
+        }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("请输入要查找失物的领取地点(领取地点1，领取地点2)");
+        String keyword = sc.next();
+        Lost[] Point=selectByKeyword(array,keyword);    //遍历得到的数组
+        int num=0;
+        for (int i = 0; i < Point.length; i++) {
+            System.out.println(Point[i].getCollections());
+            num++;
+    }
+        System.out.println("共找到"+num+"件");
+
+
+    }
+//对失物按时间从大到小排序的功能
+    public static void sortLost(Lost[] lostArray) {
+        int temp = 0;
+        for (int i = 0; i < lostArray.length; i++) {
+            for (int j = 0; j < lostArray.length - 1 - i; j++) {
+                if (lostArray[j].getDate() < lostArray[j + 1].getDate()) {
+                    temp = lostArray[j].getDate();
+                    lostArray[j].setDate(lostArray[j + 1].getDate());
+                    lostArray[j + 1].setDate(temp);
+                }
+            }
+        }
+    }
+//  用领取地点的关键字来查找
+    public static Lost[] selectByKeyword(Lost[] lostArray, String keyword) {
+        int count =0;
+        for (int i = 0, j = 0; i < lostArray.length; i++) {
+            if (Objects.equals(keyword, lostArray[i].getCollections())) {
+                count=++j;
+            }
+
+        }
+        System.out.println(count);
+        Lost[]selectByKeyword= new Lost[count];
+        for (int i = 0,k=0;  i < lostArray.length ; i++) {
+            if (Objects.equals(keyword, lostArray[i].getCollections())) {
+                selectByKeyword[k] = lostArray[i];
+                k++;
+                if (k >= count) {
+                    break;
+                }
+            }
+        }
+        return selectByKeyword;
+    }
+
+}

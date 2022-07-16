@@ -1,0 +1,63 @@
+public class Lost {
+   private String Place;
+   private int date;
+  private String collections;//领取地点
+    public Lost(String place, int date, String collections) {
+        Place = place;
+        this.date = date;
+        this.collections = collections;
+    }
+
+    public String getPlace() {
+        return Place;
+    }
+
+    public void setPlace(String place) {
+        Place = place;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
+
+    public String getCollections() {
+        return collections;
+    }
+
+    public void setCollections(String collections) {
+        this.collections = collections;
+    }
+
+    public Lost() {
+    }
+}
+class CardLost extends Lost{
+ String name;
+ int id ;
+ String sex;
+ String Profession;
+    public CardLost() {
+    }
+    public CardLost(String place, int date, String collections, String name, int id, String sex, String profession) {
+        super(place, date, collections);
+        this.name = name;
+        this.id = id;
+        this.sex = sex;
+        Profession = profession;
+    }
+}
+class BookLost extends Lost{
+String bookKinds;
+
+    public BookLost() {
+    }
+
+    public BookLost(String place, int date, String collections, String bookKinds) {
+        super(place, date, collections);
+        this.bookKinds = bookKinds;
+    }
+}
